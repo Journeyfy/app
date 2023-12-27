@@ -1,8 +1,26 @@
 import React from 'react';
+//import * as React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import BarraRicerca from './BarraRicerca';
+import './index.css';
 
-function App() {
+const AppRoutes: React.FC = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </Router>
+);
+
+const App: React.FC = () => {
+  const handleSearch = (searchTerm: string) => {
+    // Gestisci la ricerca come preferisci
+    console.log('Ricerca:', searchTerm);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,8 +37,14 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <div>
+        <h1>Applicazione con Barra di Ricerca</h1>
+        <BarraRicerca onSearch={handleSearch} />
+        {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
