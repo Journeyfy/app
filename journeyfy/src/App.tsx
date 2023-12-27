@@ -4,7 +4,6 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import BarraRicerca from './BarraRicerca';
 import './index.css';
 
 const AppRoutes: React.FC = () => (
@@ -37,12 +36,6 @@ const App: React.FC = () => {
           Learn React
         </a>
       </header>
-
-      <div>
-        <h1>Applicazione con Barra di Ricerca</h1>
-        <BarraRicerca onSearch={handleSearch} />
-        {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
-      </div>
     </div>
   );
 };

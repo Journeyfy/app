@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 //import './styles/BarraRicerca.css';
 import './BarraRicerca.css';
 import './index.css';
+import { Select,Option } from 'dolfo';
 
 
 interface BarraRicercaProps {
@@ -23,7 +24,12 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
 
   return (
     <div className="centered-container">
-    <form className="barra-ricerca" onSubmit={handleSearchSubmit}>
+      <Select canSearch label="Try typing 'John'">
+	<Option value={1} label="John Smith" />
+	<Option value={2} label="John Snow" />
+	<Option value={3} label="Steve Rogers" />
+</Select>
+    {/* <form className="barra-ricerca" onSubmit={handleSearchSubmit}>
       <input
         type="text"
         placeholder="Dove vuoi andare?..."
@@ -31,7 +37,7 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
         onChange={handleSearchChange}
       />
       <button type="submit">Dove vuoi andare?</button>
-    </form>
+    </form> */}
     </div>
   );
 };
