@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import './index.css';
-import BarraRicerca from './BarraRicerca';
-import DynamicSelect from './DynamicSelect';
+import BarraRicerca from '../../atoms/barraricerca/BarraRicerca';
 import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
@@ -31,7 +29,6 @@ const Home: React.FC = () => {
     <div>
       <h1>Applicazione con Barra di Ricerca</h1>
       <BarraRicerca onSearch={handleSearch} />
-      <DynamicSelect options={optionsData} onSelectChange={handleSelectChange} />
       {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
     </div></Fragment>)
 
