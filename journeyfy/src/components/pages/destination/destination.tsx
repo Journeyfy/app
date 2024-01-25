@@ -1,4 +1,3 @@
-// destination.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './destination.css';
@@ -27,3 +26,7 @@ const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
 };
 
 export default Destination;
+
+/*export function Destination(){
+    return <div>Ciao da Destination</div>
+}*/

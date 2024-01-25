@@ -11,11 +11,11 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
   const navigate = useNavigate();
 
   const destinazioni: Record<string, string> = {
-    'Amsterdam': '/destination',
     'John Smith': '/destination',
     'John Snow': '/destination',
     'Steve Rogers': '/destination',
     'Roma' : '/destination/1',
+    'Amsterdam': '/destination/2',
     'Altro': '/destination',
   };
 
@@ -46,6 +46,7 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
           <Option value="John Snow" label="John Snow" />
           <Option value="Steve Rogers" label="Steve Rogers" />
           <Option value="Roma" label="Roma" />
+          <Option value="Amsterdam" label="Amsterdam"/>
           <Option value="Altro" label="Altro" />
         </Select>
       </form>

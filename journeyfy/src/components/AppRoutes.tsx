@@ -9,7 +9,7 @@ const AppRoutes: React.FC = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/destination" element={<Destination cityName="Amsterdam" coverImage={cityCoverImageURL} />} />
+      <Route path="/destination/2" element={<Destination cityName="Amsterdam" coverImage={cityCoverImageURL} />} />
     </Routes>
   </Router>
 );
