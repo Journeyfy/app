@@ -1,0 +1,7 @@
+.search-container {
+    
+    display: flex;
+    max-width: 300px;
+    margin: 20px 0; /* Aggiusta il margine superiore e inferiore come desiderato */
+    margin-left: 20px; /* Imposta il margine sinistro per spazio tra il margine e la barra */
+}

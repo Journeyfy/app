@@ -27,7 +27,6 @@ const Home: React.FC = () => {
 
   return (<Fragment><h2>Esplora</h2>
     <div>
-      <h1>Applicazione con Barra di Ricerca</h1>
       <BarraRicerca onSearch={handleSearch} />
       {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
     </div></Fragment>)

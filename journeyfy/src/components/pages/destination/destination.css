@@ -1,0 +1,55 @@
+/* destination.css */
+
+/* Stile del contenitore principale */
+.destination-container {
+    max-width: 800px; /* Adatta la larghezza massima secondo le tue esigenze */
+    margin: 0; /* Centra il contenitore nella pagina */
+    padding: 20px; /* Aggiunge spaziatura interna */
+  }
+  
+  /* Stile dell'immagine di copertina */
+  .destination-cover-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bordi arrotondati */
+    margin-bottom: 20px; /* Aggiunge spaziatura inferiore */
+  }
+  
+  /* Stile per i bottoni */
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffffff; /* Colore di sfondo dei bottoni */
+    color: #000000; /* Colore del testo */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Effetto di transizione sul cambio colore */
+  }
+  
+  .button-container button:hover {
+    background-color: #afb2af; /* Colore di sfondo quando il mouse è sopra il bottone */
+  }
+  
+  .return-button {
+    background-color: #ffffff; /* Colore di sfondo del bottone */
+    color: #000; /* Colore del testo del bottone (nero) */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease; /* Effetto di transizione sul cambio colore */
+  }
+  
+  .return-button:hover {
+    background-color: #ffffff; /* Colore di sfondo quando il mouse è sopra il bottone */
+  }

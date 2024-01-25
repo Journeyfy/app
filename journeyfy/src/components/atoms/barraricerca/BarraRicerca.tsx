@@ -11,16 +11,17 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
   const navigate = useNavigate();
 
   const destinazioni: Record<string, string> = {
+    'Amsterdam': '/destination',
     'John Smith': '/destination',
     'John Snow': '/destination',
     'Steve Rogers': '/destination',
-    'Altro': '/destination', // Aggiungo altre destinazioni qui
+    'Roma' : '/destination/1',
+    'Altro': '/destination',
   };
 
   const handleSearchChange = (selectedValue: string) => {
     setSelectedOption(selectedValue);
 
-    // Eseguo il reindirizzamento alla destinazione associata all'opzione selezionata
     const destination = destinazioni[selectedValue];
     if (destination) {
       navigate(destination);
@@ -29,24 +30,28 @@ const BarraRicerca: React.FC<BarraRicercaProps> = ({ onSearch }) => {
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Chiamo la funzione di callback passando il termine di ricerca
     onSearch(selectedOption);
   };
 
   return (
-    <div className="centered-container">
-      <Select
-        canSearch
-        label="Prova a digitare 'John'"
-        onChange={(selectedValue: string) => handleSearchChange(selectedValue)}
-      >
-        <Option value="John Smith" label="John Smith" />
-        <Option value="John Snow" label="John Snow" />
-        <Option value="Steve Rogers" label="Steve Rogers" />
-        <Option value="Altro" label="Altro" />
-      </Select>
+    <div className="search-container">
+      <form onSubmit={handleSearchSubmit}>
+        <Select
+          canSearch
+          //label="Barra Ricerca"
+          onChange={(selectedValue: string) => handleSearchChange(selectedValue)}
+        >
+           <Option value="" label="Dove vuoi andare?" disabled />
+          <Option value="John Smith" label="John Smith" />
+          <Option value="John Snow" label="John Snow" />
+          <Option value="Steve Rogers" label="Steve Rogers" />
+          <Option value="Roma" label="Roma" />
+          <Option value="Altro" label="Altro" />
+        </Select>
+      </form>
     </div>
   );
 };
 
 export default BarraRicerca;
+
