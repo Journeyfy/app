@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import BarraRicerca from '../../atoms/barraricerca/BarraRicerca';
+import { BarraRicerca, OptionProps } from '../../atoms/barraricerca/BarraRicerca';
 import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
@@ -8,30 +8,17 @@ const Home: React.FC = () => {
   const navigate = useNavigate(); // Cambiato da useHistory a useNavigate
   const [selectedOption, setSelectedOption] = useState<string>('');
 
-  function handleSearch(searchTerm: string): void {
+  function handleSearch(searchTerm: string): OptionProps[] {
+    return []
     //throw new Error('Function not implemented.');
   }
 
-  const handleSelectChange = (selectedValue: string): void => {
-    setSelectedOption(selectedValue);
-
-    // Esegui il reindirizzamento alla root destination associata all'opzione selezionata
-    if (selectedValue === 'Opzione 1') {
-      navigate('/activity1');
-    } else if (selectedValue === 'Opzione 2') {
-      navigate('/activity2');
-    } // Posso aggiungere altri casi a seconda delle opzioni
-
-    // Posso anche implementare una logica più dinamica basata sulle opzioni e sulle destinazioni
-  };
-
   return (<Fragment><h2>Esplora</h2>
     <div>
-      <BarraRicerca onSearch={handleSearch} />
+      <BarraRicerca label='Dove vuoi andare?' onSearch={handleSearch} />
       {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
     </div></Fragment>)
 
 };
-
 
 export default Home;
