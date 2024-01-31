@@ -3,7 +3,7 @@ import { Select, Option, Autocomplete } from 'dolfo';
 import { useNavigate } from 'react-router-dom';
 
 interface BarraRicercaProps {
-  onSearch: (searchTerm: string) => OptionProps[];
+  onSearch: (searchTerm: string) => Promise<OptionProps[]>;
 }
 
 export interface OptionProps{
