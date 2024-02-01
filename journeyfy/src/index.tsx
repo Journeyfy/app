@@ -1,8 +1,9 @@
-import { createRoot } from "react-dom/client";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../node_modules/dolfo/comps/shared/styles/_dolfo.scss";
+import "./index.scss";
+import { createRoot } from "react-dom/client";
 import { axiosBuilder } from "./axiosBuilder";
 import AppRoutes from "./components/AppRoutes";
-import "./index.css";
 
 export const axiosInstance = axiosBuilder(
   "https://journeyfy-api.onrender.com/api/v1/"

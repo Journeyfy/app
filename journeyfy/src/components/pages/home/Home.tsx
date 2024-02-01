@@ -1,5 +1,4 @@
 import _ from "lodash";
-import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { DestinationApiService } from "../../../services/destinationApiService";
 import {
@@ -23,7 +22,7 @@ const Home = () => {
     navigate(`/destination/${value.id}`);
 
   return (
-    <Fragment>
+    <div className="activity explore-activity">
       <h2>Esplora</h2>
       <div>
         <BarraRicerca
@@ -32,7 +31,7 @@ const Home = () => {
           onChange={onDestinationSelect}
         />
       </div>
-    </Fragment>
+    </div>
   );
 };
 
