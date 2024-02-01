@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Select, Option, Autocomplete } from 'dolfo';
-import { useNavigate } from 'react-router-dom';
+import { Autocomplete } from "dolfo";
 
 interface BarraRicercaProps {
   onSearch: (searchTerm: string) => Promise<OptionProps[]>;
 }
 
-export interface OptionProps{
-    readonly id: string
-    readonly name: string
+export interface OptionProps {
+  readonly id: number;
+  readonly name: string;
 }
 
-export class BarraRicerca extends Autocomplete<OptionProps, string, BarraRicercaProps>{
-  getSource = this.props.onSearch
-
-getDescription = (item: OptionProps) => item.name
-
-getKey = (item: OptionProps) => item.id
+export class BarraRicerca extends Autocomplete<
+  OptionProps,
+  number,
+  BarraRicercaProps
+> {
+  getSource = this.props.onSearch;
+  getDescription = (item: OptionProps) => item.name;
+  getKey = (item: OptionProps) => item.id;
 }

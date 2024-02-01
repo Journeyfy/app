@@ -1,39 +1,39 @@
-import React, { Fragment, useState } from 'react';
-import { BarraRicerca, OptionProps } from '../../atoms/barraricerca/BarraRicerca';
-import { useNavigate } from 'react-router-dom';
+import _ from "lodash";
+import { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
+import { DestinationApiService } from "../../../services/destinationApiService";
+import {
+  BarraRicerca,
+  OptionProps,
+} from "../../atoms/barraricerca/BarraRicerca";
 
-const Home: React.FC = () => {
+const Home = () => {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState<string>('');
 
   // Funzione di ricerca che chiama l'API
   const handleSearch = async (searchTerm: string): Promise<OptionProps[]> => {
-    try {
-      console.log (searchTerm);
-      const response = await fetch(`https://journeyfy-api.onrender.com/api/v1/destinations?term=${searchTerm}`);
-      const data = response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return []; // Gestisci l'errore restituendo un array vuoto o implementa una logica di gestione degli errori
-    }
+    const data = await DestinationApiService.getDestinationsByTerm(searchTerm);
+    console.log(data);
+    return _.map(data, (d) => ({ id: d.idDestination, name: d.name }));
   };
 
-  const handleChange = (event: React.ChangeEvent<{ value: string }>) => {
-    const term = event.target.value;
-    setSelectedOption(term);
-  };
+  // Funzione che gestice il click su una option
+  // Al click l'utente viene riportato al dettglio della destinazione
+  const onDestinationSelect = (value: OptionProps) =>
+    navigate(`/destination/${value.id}`);
 
   return (
     <Fragment>
       <h2>Esplora</h2>
       <div>
-        <BarraRicerca label='Dove vuoi andare?' onSearch={(selectedOption) => handleSearch(selectedOption)} />
-        {/* Altri contenuti dell'applicazione possono essere aggiunti qui */}
+        <BarraRicerca
+          label="Dove vuoi andare?"
+          onSearch={handleSearch}
+          onChange={onDestinationSelect}
+        />
       </div>
     </Fragment>
   );
 };
 
 export default Home;
-
