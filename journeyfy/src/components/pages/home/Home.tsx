@@ -12,7 +12,6 @@ const Home = () => {
   // Funzione di ricerca che chiama l'API
   const handleSearch = async (searchTerm: string): Promise<OptionProps[]> => {
     const data = await DestinationApiService.getDestinationsByTerm(searchTerm);
-    console.log(data);
     return _.map(data, (d) => ({ id: d.idDestination, name: d.name }));
   };
 

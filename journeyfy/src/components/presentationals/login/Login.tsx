@@ -1,9 +1,12 @@
-import { Button, TextInput } from "dolfo";
-import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { TextInput } from "dolfo";
+import { useContext, useEffect, useState } from "react";
+import { Button, Container } from "react-bootstrap";
 import { AuthApiService } from "../../../services/authApiService";
+import { UserContext } from "../../layout/Navbar/Navbar";
 
 export const Login = () => {
+  const { user, setUser } = useContext(UserContext);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,19 +23,25 @@ export const Login = () => {
   }, [formType]);
 
   const onSubmit = async () => {
-    formType === "signin"
-      ? await AuthApiService.login(email, password)
-      : await AuthApiService.register(
-          firstName,
-          lastName,
-          email,
-          password,
-          confirmPassword
-        );
+    if (formType === "signin") {
+      const res = await AuthApiService.login(email, password);
+      if (res?.data) {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        setUser(res.data);
+      }
+    } else {
+      await AuthApiService.register(
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword
+      );
+    }
   };
 
   return (
-    <Container fluid>
+    <Container fluid onKeyUp={({ key }) => key === "Enter" && onSubmit()}>
       {formType === "signup" && (
         <>
           <TextInput
@@ -85,7 +94,7 @@ export const Login = () => {
         />
       )}
 
-      <Button btnColor="green" className="col-12" onClick={onSubmit}>
+      <Button variant="success" className="col-12" onClick={onSubmit}>
         {formType === "signin" ? "Accedi" : "Registrati"}
       </Button>
 
