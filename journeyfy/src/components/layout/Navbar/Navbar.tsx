@@ -4,6 +4,7 @@ import { User } from "../../../models/user";
 import { AuthApiService } from "../../../services/authApiService";
 import { userInfoSelector } from "../../../utils/selectors";
 import { Login } from "../../presentationals/login/Login";
+import { useNavigate } from "react-router-dom";
 
 interface IUserContext {
   user: User | null;
@@ -13,11 +14,13 @@ export const UserContext = createContext<IUserContext>(null!);
 
 export const MyNavbar = () => {
   const [user, setUser] = useState(userInfoSelector);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     AuthApiService.logout().then(() => {
       setUser(null);
       localStorage.removeItem("user");
+      navigate("/", { replace: true });
     });
   };
 
@@ -39,9 +42,7 @@ export const MyNavbar = () => {
             </SplitButton>
           ) : (
             <Dropdown id="signin-dropdown">
-              <Dropdown.Toggle variant="primary" >
-                Accedi
-              </Dropdown.Toggle>
+              <Dropdown.Toggle variant="primary">Accedi</Dropdown.Toggle>
               <Dropdown.Menu align="end">
                 <Login />
               </Dropdown.Menu>

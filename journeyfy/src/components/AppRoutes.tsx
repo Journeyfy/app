@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AppLayout } from "./layout/AppLayout";
 import Destination from "./pages/destination/Destination";
-import { MyNavbar } from "./layout/Navbar/Navbar";
+import Home from "./pages/home/Home";
 import { Requests } from "./pages/requests/Requests";
 
 const cityCoverImageURL =
@@ -10,17 +10,21 @@ const cityCoverImageURL =
 
 const AppRoutes: React.FC = () => (
   <>
-    <MyNavbar />
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/destination/2"
-          element={
-            <Destination cityName="Amsterdam" coverImage={cityCoverImageURL} />
-          }
-        />
-        <Route path="/requests" element={<Requests />} />
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/destination/2"
+            element={
+              <Destination
+                cityName="Amsterdam"
+                coverImage={cityCoverImageURL}
+              />
+            }
+          />
+          <Route path="/requests" element={<Requests />} />
+        </Route>
       </Routes>
     </Router>
   </>
