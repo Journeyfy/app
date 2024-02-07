@@ -15,6 +15,17 @@ export class DestinationApiService {
     }
   }
 
+  public static async getDestinationInfo(idDestination: number) {
+    try {
+      return (
+        await axiosInstance.get<Destination>(`destinations/${idDestination}`)
+      ).data;
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      return null;
+    }
+  }
+
   public static async getDestinationSuggestions(
     idDestination: number,
     type: SuggestionType
