@@ -1,0 +1,24 @@
+// atoms
+@import './components/atoms/barraricerca/BarraRicerca.scss';
+
+// layout
+@import './components/layout/Navbar/Navbar.scss';
+
+// pages
+@import './components/pages/home/Home.scss';
+@import './components/pages/destination/Destination.scss';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .activity {
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

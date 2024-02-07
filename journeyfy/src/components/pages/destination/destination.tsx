@@ -21,6 +21,7 @@ const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
   };
 
   return (
+    <div className="activity destination-activity">
     <div className="destination-container">
       <div className="content-container">
         <h1>{cityName}</h1>
@@ -76,6 +77,7 @@ const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
           )}
         </div>
       </SideMenu>
+    </div>
     </div>
   );
 };
