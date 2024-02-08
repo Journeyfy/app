@@ -6,7 +6,7 @@ import { axiosBuilder } from "./axiosBuilder";
 import AppRoutes from "./components/AppRoutes";
 
 export const axiosInstance = axiosBuilder(
-  "http://localhost:5050/api/v1/"
+  "http://localhost:5050/api/v1"
 );
 
 const container = document.getElementById("root");

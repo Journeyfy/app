@@ -1,5 +1,5 @@
-import { SuggestionRequestType } from "../enums/suggestionRequestType";
-import { SuggestionType } from "../enums/suggestionType";
+import { SuggestionRequestType } from "../../enums/suggestionRequestType";
+import { SuggestionType } from "../../enums/suggestionType";
 
 export interface CreateSuggestionRequest {
     readonly idDestination: number;
