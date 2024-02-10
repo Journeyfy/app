@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'dolfo/comps/layout/Button';
 import { MenuItem, SideMenu } from 'dolfo';
-import './destination.css';
 
 interface DestinationProps {
   cityName: string;
   coverImage: string;
 }
 
-const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
+const Destination: React.FC = ({ }) => {  
+  console.log("Test")
+  let { destinationId } = useParams();
+  console.log(destinationId)
   const [currentMenu, setCurrentMenu] = useState<string | null>(null);
 
   const openMenu = (menuName: string) => {
@@ -20,12 +22,10 @@ const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
     setCurrentMenu(null);
   };
 
-  return (
+  return (<>
     <div className="activity destination-activity">
     <div className="destination-container">
       <div className="content-container">
-        <h1>{cityName}</h1>
-        <img className="destination-cover-image" src={coverImage} alt={`Copertina di ${cityName}`} />
         <div className="button-container">
           <button onClick={() => openMenu('Luoghi da vedere')}>Luoghi da vedere</button>
           <button onClick={() => openMenu('Attività')}>Attività</button>
@@ -78,7 +78,7 @@ const Destination: React.FC<DestinationProps> = ({ cityName, coverImage }) => {
         </div>
       </SideMenu>
     </div>
-    </div>
+    </div></>
   );
 };
 

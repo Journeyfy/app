@@ -5,8 +5,8 @@ import Destination from "./pages/destination/Destination";
 import Home from "./pages/home/Home";
 import { Requests } from "./pages/requests/Requests";
 
-const cityCoverImageURL =
-  "https://media.cntraveler.com/photos/64c2a8052e6469f8103691aa/4:3/w_4920,h_3690,c_limit/Amsterdam-Took-a-Big-Step-Toward-Banning-Cruise-Ships-From-the-City-Center_GettyImages-1394428970.jpg";
+//const cityCoverImageURL =
+ // "https://media.cntraveler.com/photos/64c2a8052e6469f8103691aa/4:3/w_4920,h_3690,c_limit/Amsterdam-Took-a-Big-Step-Toward-Banning-Cruise-Ships-From-the-City-Center_GettyImages-1394428970.jpg";
 
 const AppRoutes: React.FC = () => (
   <>
@@ -14,15 +14,7 @@ const AppRoutes: React.FC = () => (
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/destination/2"
-            element={
-              <Destination
-                cityName="Amsterdam"
-                coverImage={cityCoverImageURL}
-              />
-            }
-          />
+          <Route path="destination/:destinationId" element={<Destination />} />
           <Route path="/requests" element={<Requests />} />
         </Route>
       </Routes>
