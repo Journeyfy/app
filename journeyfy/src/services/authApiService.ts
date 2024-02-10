@@ -5,7 +5,7 @@ import { User } from "../models/user";
 export class AuthApiService {
   public static async login(email: string, password: string) {
     try {
-      return axiosInstance.post<User>(`login`, { email, password });
+      return axiosInstance.post<User>(`/login`, { email, password });
     } catch (err) {
       console.error("Error fetching data:", err);
     }
@@ -13,7 +13,7 @@ export class AuthApiService {
 
   public static async logout() {
     try {
-      return axiosInstance.get("logout");
+      return axiosInstance.get("/logout");
     } catch (err) {
       console.error("Error during logout:", err);
     }
@@ -28,7 +28,7 @@ export class AuthApiService {
   ): Promise<any> {
     try {
       return (
-        await axiosInstance.post(`users`, {
+        await axiosInstance.post(`/users`, {
           firstName,
           lastName,
           email,
