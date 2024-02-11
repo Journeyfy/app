@@ -4,6 +4,7 @@ import { SuggestionType } from "../enums/suggestionType";
 import { Destination } from "../models/destination";
 import { Suggestion } from "../models/suggestion";
 
+
 export class DestinationApiService {
   public static async getDestinationsByTerm(term: string) {
     try {
