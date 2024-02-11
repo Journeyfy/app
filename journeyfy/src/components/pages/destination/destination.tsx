@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Button from 'dolfo/comps/layout/Button';
 import { MenuItem, SideMenu } from 'dolfo';
 import { Destination as DestinationType } from '../../../models/destination';
 import { DestinationApiService } from '../../../services/destinationApiService';
+import { SuggestionType } from '../../../enums/suggestionType';
 
 const Destination: React.FC = () => {
-  const [destinationInfo, setDestinationInfo] = useState<DestinationType | null> (null);
+  const [destinationInfo, setDestinationInfo] = useState<DestinationType | null>(null);
+  const [suggestionCategories, setSuggestionCategories] = useState<
+    { type: SuggestionType; suggestions: any[] }[]
+  >([]);
   const { destinationId } = useParams();
   const [currentMenu, setCurrentMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await DestinationApiService.getDestinationInfo(Number(destinationId));
-        setDestinationInfo(result);
+        const [info, toSeeSuggestions, toDoSuggestions, toEatSuggestions] = await Promise.all([
+          DestinationApiService.getDestinationInfo(Number(destinationId)),
+          DestinationApiService.getDestinationSuggestions(Number(destinationId), SuggestionType.ToSee),
+          DestinationApiService.getDestinationSuggestions(Number(destinationId), SuggestionType.ToDo),
+          DestinationApiService.getDestinationSuggestions(Number(destinationId), SuggestionType.ToEat),
+        ]);
+
+        setDestinationInfo(info);
+        setSuggestionCategories([
+          { type: SuggestionType.ToSee, suggestions: toSeeSuggestions },
+          { type: SuggestionType.ToDo, suggestions: toDoSuggestions },
+          { type: SuggestionType.ToEat, suggestions: toEatSuggestions },
+        ]);
       } catch (error) {
         console.error('Errore durante il recupero dei dati:', error);
       }
@@ -36,68 +50,38 @@ const Destination: React.FC = () => {
       <div className="activity destination-activity">
         <div className="destination-container">
           <div className="content-container">
-          <h1>{destinationInfo?.name}</h1>
-          <img
-            className="destination-cover-image"
-            src={destinationInfo?.image}
-            alt={`Copertina di ${destinationInfo?.name}`}
-          />
+            <h1>{destinationInfo?.name}</h1>
+            <img
+              className="destination-cover-image"
+              src={destinationInfo?.image}
+              alt={`Copertina di ${destinationInfo?.name}`}
+            />
             <div className="button-container">
-              <button onClick={() => openMenu('Luoghi da vedere')}>Luoghi da vedere</button>
-              <button onClick={() => openMenu('Attività')}>Attività</button>
-              <button onClick={() => openMenu('Locali')}>Locali</button>
+              {suggestionCategories.map((category) => (
+                <button key={category.type} onClick={() => openMenu(category.type.toString())}>
+                  {category.type}
+                </button>
+              ))}
             </div>
 
-            <SideMenu
-              style={{ background: '#999999' }}
-              direction="right"
-              opened={currentMenu !== null}
-              onToggle={closeMenu}
-            >
-              <div style={{ textAlign: 'center', padding: '20px' }}>
-                <h2>{currentMenu}</h2>
-                {/* Renderizza il contenuto in base al menu selezionato */}
-                {currentMenu === 'Luoghi da vedere' && (
-                  <>
-                    <MenuItem>
-                      <Link to="/">Luogo 1</Link>
+            {suggestionCategories.map((category) => (
+              <SideMenu
+                key={category.type}
+                style={{ background: '#999999' }}
+                direction="right"
+                opened={currentMenu === category.type.toString()}
+                onToggle={closeMenu}
+              >
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <h2>{category.type}</h2>
+                  {category.suggestions.map((suggestion) => (
+                    <MenuItem key={suggestion.id}>
+                      <Link to={`/suggestion/${suggestion.id}`}>{suggestion.name}</Link>
                     </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Luogo 2</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Luogo 3</Link>
-                    </MenuItem>
-                  </>
-                )}
-                {currentMenu === 'Attività' && (
-                  <>
-                    <MenuItem>
-                      <Link to="/">Attività 1</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Attività 2</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Attività 3</Link>
-                    </MenuItem>
-                  </>
-                )}
-                {currentMenu === 'Locali' && (
-                  <>
-                    <MenuItem>
-                      <Link to="/">Locale 1</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Locale 2</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/">Locale 3</Link>
-                    </MenuItem>
-                  </>
-                )}
-              </div>
-            </SideMenu>
+                  ))}
+                </div>
+              </SideMenu>
+            ))}
           </div>
         </div>
       </div>
