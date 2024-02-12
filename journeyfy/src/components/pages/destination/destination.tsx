@@ -4,11 +4,12 @@ import { MenuItem, SideMenu } from 'dolfo';
 import { Destination as DestinationType } from '../../../models/destination';
 import { DestinationApiService } from '../../../services/destinationApiService';
 import { SuggestionType } from '../../../enums/suggestionType';
+import { Suggestion } from '../../../models/suggestion';
 
 const Destination: React.FC = () => {
   const [destinationInfo, setDestinationInfo] = useState<DestinationType | null>(null);
   const [suggestionCategories, setSuggestionCategories] = useState<
-    { type: SuggestionType; suggestions: any[] }[]
+    { type: SuggestionType; suggestions: Suggestion[] }[]
   >([]);
   const { destinationId } = useParams();
   const [currentMenu, setCurrentMenu] = useState<string | null>(null);
@@ -76,7 +77,7 @@ const Destination: React.FC = () => {
                   <h2>{category.type}</h2>
                   {category.suggestions.map((suggestion) => (
                     <MenuItem key={suggestion.id}>
-                      <Link to={`/suggestion/${suggestion.id}`}>{suggestion.name}</Link>
+                     <a href={suggestion.mapLink}>{suggestion.title}</a>
                     </MenuItem>
                   ))}
                 </div>
