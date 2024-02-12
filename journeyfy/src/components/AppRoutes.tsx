@@ -8,7 +8,7 @@ import { ProtectedRoute } from "./layout/ProtectedRoute";
 import { Role } from "../enums/roles";
 
 //const cityCoverImageURL =
- // "https://media.cntraveler.com/photos/64c2a8052e6469f8103691aa/4:3/w_4920,h_3690,c_limit/Amsterdam-Took-a-Big-Step-Toward-Banning-Cruise-Ships-From-the-City-Center_GettyImages-1394428970.jpg";
+// "https://media.cntraveler.com/photos/64c2a8052e6469f8103691aa/4:3/w_4920,h_3690,c_limit/Amsterdam-Took-a-Big-Step-Toward-Banning-Cruise-Ships-From-the-City-Center_GettyImages-1394428970.jpg";
 
 const AppRoutes: React.FC = () => (
   <>
@@ -17,7 +17,11 @@ const AppRoutes: React.FC = () => (
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="destination/:destinationId" element={<Destination />} />
-          <Route path="/requests" element={<Requests />} />
+          <Route
+            element={<ProtectedRoute allowedRoles={[Role.Admin, Role.Mod]} />}
+          >
+            <Route path="/requests" element={<Requests />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

@@ -25,6 +25,7 @@ const Home = () => {
       <h2>Esplora</h2>
       <div>
         <BarraRicerca
+          icon={{ iconKey: "search" }}
           label="Dove vuoi andare?"
           onSearch={handleSearch}
           onChange={onDestinationSelect}

@@ -2,10 +2,10 @@ import { TextInput } from "dolfo";
 import { useContext, useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { AuthApiService } from "../../../services/authApiService";
-import { UserContext } from "../../layout/Navbar/Navbar";
+import { UserContext } from "../../layout/AppLayout";
 
 export const Login = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
