@@ -10,9 +10,10 @@ export class SuggestionApiService {
     payload: CreateSuggestionRequest
   ) {
     try {
-      await axiosInstance.post("/suggestions/addRequest", payload);
+      return axiosInstance.post("/suggestions/addRequest", payload);
     } catch (err) {
       console.log("Error sending suggestion request:", err);
+      NotificationMsg.showError("Errore durante la richiesta");
     }
   }
 
