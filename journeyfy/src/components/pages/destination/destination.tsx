@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Icon, MenuItem, NotificationMsg, SideMenu, TextInput } from "dolfo";
-import { Destination as DestinationType } from "../../../models/destination";
-import { DestinationApiService } from "../../../services/destinationApiService";
-import { SuggestionType } from "../../../enums/suggestionType";
-import { Suggestion } from "../../../models/suggestion";
-import { UserContext } from "../../layout/AppLayout";
+import { Icon, NotificationMsg, SideMenu, TextInput } from "dolfo";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { SuggestionApiService } from "../../../services/suggestionApiService";
+import { useParams } from "react-router-dom";
 import { SuggestionRequestType } from "../../../enums/suggestionRequestType";
-import { isNull } from "lodash";
+import { SuggestionType } from "../../../enums/suggestionType";
+import { Destination as DestinationType } from "../../../models/destination";
+import { Suggestion } from "../../../models/suggestion";
+import { DestinationApiService } from "../../../services/destinationApiService";
 import { CreateSuggestionRequest } from "../../../services/httpContracts/createSuggestionRequest";
+import { SuggestionApiService } from "../../../services/suggestionApiService";
+import { mapSuggestionTypeToString } from "../../../utils/mappings";
+import { UserContext } from "../../layout/AppLayout";
 
 const Destination: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -135,18 +135,6 @@ const Destination: React.FC = () => {
     );
   };
 
-  // utils
-  const mapSuggestionTypeToString = (status: SuggestionType) => {
-    switch (status) {
-      case SuggestionType.ToSee:
-        return "Cosa vedere";
-      case SuggestionType.ToDo:
-        return "Cosa fare";
-      case SuggestionType.ToEat:
-        return "Dove mangiare";
-    }
-  };
-
   return (
     <>
       <div className="activity destination-activity">
@@ -206,17 +194,19 @@ const Destination: React.FC = () => {
                           </>
                         )}
                       </div>
-                      <div className="d-flex align-items-center gap-2">
-                        <Icon
-                          iconKey="pen"
-                          onClick={() => onEditSuggestion(suggestion)}
-                        />
-                        <Icon
-                          iconKey="trash"
-                          color="red"
-                          onClick={() => onDeleteSuggestion(suggestion)}
-                        />
-                      </div>
+                      {user && (
+                        <div className="d-flex align-items-center gap-2">
+                          <Icon
+                            iconKey="pen"
+                            onClick={() => onEditSuggestion(suggestion)}
+                          />
+                          <Icon
+                            iconKey="trash"
+                            color="red"
+                            onClick={() => onDeleteSuggestion(suggestion)}
+                          />
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

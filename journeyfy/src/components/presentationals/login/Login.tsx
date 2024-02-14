@@ -30,13 +30,13 @@ export const Login = () => {
         setUser(res.data);
       }
     } else {
-      await AuthApiService.register(
+      AuthApiService.register(
         firstName,
         lastName,
         email,
         password,
         confirmPassword
-      );
+      )?.then(() => setFormType("signin"));
     }
   };
 
@@ -80,6 +80,7 @@ export const Login = () => {
         togglePassword
         className="mb-2"
         autocomplete="new-password"
+        minLength={8}
       />
       {formType === "signup" && (
         <TextInput
@@ -91,6 +92,7 @@ export const Login = () => {
           togglePassword
           className="mb-4"
           autocomplete="new-password"
+          minLength={8}
         />
       )}
 

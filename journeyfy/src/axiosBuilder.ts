@@ -11,7 +11,7 @@ export function axiosBuilder(baseURL: string) {
   axiosInstance.interceptors.request.use(
     (config) => config,
     (err) => {
-      console.error(err);
+      console.error("[REQ]", err);
       NotificationMsg.showError("Errore durante l'invio della richiesta");
       Promise.reject(err);
     }
